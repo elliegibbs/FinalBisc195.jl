@@ -50,11 +50,11 @@ function composition(sequence)
         end
     end
     
-    bases = Dict("A" => a,
-                "G" => g,
-                "T" => t,
-                "N" => n,
-                "C" => c)
+    bases = Dict('A' => a,
+                'G' => g,
+                'T' => t,
+                'N' => n,
+                'C' => c)
    
 
     return bases
@@ -69,8 +69,8 @@ function gc_content(sequence)
    
 
     seqlength = length(sequence)
-    gs = basecounts["G"]
-    cs = basecounts["C"]
+    gs = basecounts['G']
+    cs = basecounts['C']
 
 
     return (gs + cs) / seqlength 
@@ -98,6 +98,7 @@ return outcome
 end
 
 function reverse_complement(sequence)
+    sequence = normalizeDNA(sequence)
     backwards = reverse(sequence)
     backarray = []
     for i in 1:length(backwards)
@@ -112,12 +113,10 @@ function fasta_header(header)
     if startswith(header, '>')
         header = string(header)
         header = chop(header, head = 1, tail = 0)   
-        Tuple(header)
     return header 
     else
         error("Invalid header (headers must start with '>')")
     end
-    return covid 
 end
 
 function parse_fasta(path)
@@ -133,6 +132,7 @@ function parse_fasta(path)
         
         if startswith(line, '>')
             header_vector = fasta_header(line)
+            #header_vector = Tuple([header_vector])
             push!(head_array, header_vector)
             another_array_string = join(another_array)
             if !isempty(another_array) 
@@ -141,12 +141,14 @@ function parse_fasta(path)
             another_array = []
         else
             body_line = line
+            body_line = normalizeDNA(line)
             push!(another_array, body_line)
         end
         
     end
     another_array_string = join(another_array)
     push!(body_array, another_array_string)
+    Tuple([body_array])
     return head_array, body_array
 end
 end # module Assignment07
