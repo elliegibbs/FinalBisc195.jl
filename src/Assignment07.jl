@@ -111,8 +111,8 @@ end
 
 function fasta_header(header)
     if startswith(header, '>')
-        header = string(header)
         header = chop(header, head = 1, tail = 0)   
+        header = string(header)
     return header 
     else
         error("Invalid header (headers must start with '>')")
@@ -148,7 +148,6 @@ function parse_fasta(path)
     end
     another_array_string = join(another_array)
     push!(body_array, another_array_string)
-    Tuple([body_array])
     return head_array, body_array
 end
 end # module Assignment07
