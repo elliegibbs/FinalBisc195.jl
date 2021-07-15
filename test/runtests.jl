@@ -1,7 +1,7 @@
-using Assignment07
+using FinalBisc195
 using Test
 
-@testset "Assignment07" begin
+@testset "FinalBisc195" begin
     
 @testset "Using Strings" begin
     
@@ -141,4 +141,4 @@ end # strings
 
 # end # BioSequences
 
-end # Assignment07
+end # FinalBisc195
