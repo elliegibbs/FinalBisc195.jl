@@ -1,4 +1,4 @@
-module Assignment07
+module FinalBisc195
 
 export normalizeDNA
 export composition 
